@@ -1,22 +1,25 @@
 import { useDispatch, useSelector } from "react-redux";
+import { counterActions } from "./counter-slice";
 import cssClass from "./Counter.module.css";
 
-export const Counter = () => {
+const Counter = () => {
   let dispatch = useDispatch();
-  let counter = useSelector((state) => state.counter);
-  let isCounterVisible = useSelector((state) => state.showCounter);
+  let counter = useSelector((state) => state.counterReducer.counter);
+  let isCounterVisible = useSelector(
+    (state) => state.counterReducer.showCounter
+  );
 
   const incrementHandler = () => {
-    dispatch({ type: "Increment" });
+    dispatch(counterActions.increment());
   };
   const dectementHandler = () => {
-    dispatch({ type: "Decrement" });
+    dispatch(counterActions.decrement());
   };
   const incrementByValueHandler = () => {
-    dispatch({ type: "IncrementByValue", amount: 10 });
+    dispatch(counterActions.incrementByValue(10));
   };
   const changeVisibilityHandler = () => {
-    dispatch({ type: "UpdateCounterVisibility" });
+    dispatch(counterActions.toggleVisibility());
   };
 
   return (
